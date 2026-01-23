@@ -1,0 +1,49 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding:  0 ;
+}
+body{
+    display: flex;
+    height: 90vh;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+}
+.score{
+    color: white;
+}
+main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 60vh;
+    min-height: 80vh;
+    border: 1px solid white;
+    gap: 20px;
+}
+img{
+    width: 60px;
+}
+.btn-container{
+    display: flex;
+    border: 1px solid red;
+    width: 100%;
+}
+button{
+    background-color: black;
+    border: 1px solid white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+    padding: min(2vh,4%);
+}
+.result-computer, .result-player, .result{
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
