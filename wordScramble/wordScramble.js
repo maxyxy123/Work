@@ -5,25 +5,46 @@ const hints = document.querySelector(".hint");
 const time = document.querySelector(".time");
 const input = document.getElementById("input");
 const categorys = document.querySelector(".category");
+const displayScore = document.querySelector(".score");
 const refresh = document.querySelector(".refresh");
 const check = document.querySelector(".check");
+const playButton = document.querySelector(".play");
 
 let timerId;
 let word = "";
+let score = localStorage.getItem("drawer") || 0;
+displayScore.textContent =  `Score : ${score}` ?? 'Score : 0'
+
+refresh.addEventListener("click", renderWords);
+
+playButton.addEventListener("click", renderWords);
+
 check.addEventListener("click", async () => {
   const answer = input.value.toLowerCase();
   console.log(answer);
   console.log(word);
   if (answer === word) {
     alert("Correct");
+    score++;
+    renderWords();
+  } else {
+    score--;
     renderWords();
   }
+  input.value = "";
+  saveToStorage();
 });
+
+function saveToStorage() {
+  localStorage.setItem("drawer", score);
+}
 
 async function renderWords() {
   if (timerId) {
     clearInterval(timerId);
   }
+  countDown();
+  displayScore.textContent = `Score :${score}`;
   const data = await api();
   word = data.word;
   const finalWord = word.split("");
@@ -41,21 +62,18 @@ async function renderWords() {
   displayWord.textContent = display;
 
   categorys.textContent = `Category :${data?.category ?? "No data"}`;
-  hints.textContent = `Hint :${data?.hint ?? " No data"}`;
-
-  countDown();
+  hints.textContent = `Hint : ${data?.hint ?? " No data"}`;
 
   return word;
 }
-renderWords();
 
-function countDown(seccond = 3) {
+function countDown(seccond = 30) {
   let remaining = "";
 
   timerId = setInterval(() => {
-    remaining = seccond-- + "s";
+    remaining = seccond--;
     time.textContent = remaining;
-    if (remaining < 0) {
+    if (remaining <= 0) {
       clearInterval(timerId);
       renderWords();
     }
