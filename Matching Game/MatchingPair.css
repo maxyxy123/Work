@@ -1,0 +1,41 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+    background-color: black;
+}
+main{
+    
+    display: grid;
+    grid-template-columns: 100px 100px 100px ;
+    grid-template-rows:60px 60px 60px  60px  ;
+    gap: 1rem;
+}
+.card{
+    border: 1px solid red;
+    color: white;
+    text-align: center;
+    background-color: green;
+    cursor: pointer;
+}
+
+.before{
+ color:transparent;
+}
+
+.selected {
+    outline: 2px solid #22c55e; /* đánh dấu đang chọn, tùy bạn */
+  }
+
+
+ .hidden {
+    visibility: hidden;   /* hoặc dùng display: none; */
+  }
+
+  
